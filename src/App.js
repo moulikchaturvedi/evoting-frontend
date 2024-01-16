@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div style={{ textAlign: "center" }}>
+        <h1 className="mx-5 my-5">Home</h1>
+        <h5>
+          Login first then <Link to={"/dashboard"}>go to your dashboard!</Link>
+        </h5>
+        <div>
+          <Link to={"/voting"}>voting</Link>
+        </div>
+        <Link to={"/register"}>register </Link>
+      </div>
+    </>
   );
 }
 
