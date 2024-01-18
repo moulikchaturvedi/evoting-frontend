@@ -82,8 +82,9 @@ function Register() {
             <span className="text-danger">
               IT IS IMPORTANT TO REGISTER YOUR VOTER-ID BEFORE YOU PROCEED.
             </span>
+            {"\n"}
             <span className="text-danger">
-              If already registered, do nothing.{" "}
+              If already applied, do nothing.{" "}
               <Link to={"/dashboard"}>Go Back to Dashboard!</Link>
             </span>
             <form className="my-3" onSubmit={handleSubmit}>
@@ -94,7 +95,9 @@ function Register() {
                 value={VoterID}
                 onChange={(e) => setVoterID(e.target.value)}
               />
-              <button className="my-3 btn btn-secondary">Register</button>
+              <button className="my-3 btn btn-secondary">
+                Apply for Registeration
+              </button>
             </form>
           </div>
         )}

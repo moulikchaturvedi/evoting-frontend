@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
 import "./App.css";
+import { Buffer } from "buffer/"; // <-- no typo here ("/")
+import process from "process";
+import EventEmitter from "events";
+window.global = window;
+
+window.Buffer = Buffer;
+window.process = process;
+window.EventEmitter = EventEmitter;
 
 function App() {
   return (
