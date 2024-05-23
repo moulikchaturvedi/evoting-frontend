@@ -14,6 +14,27 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+
+  // const [params, setParams] = useState();
+  // const fullscreenPopup = async (url) => {
+  //   width = screen.width;
+  //   height = screen.height;
+  //   setParams(
+  //     "width=" +
+  //       screen.width +
+  //       ", height=" +
+  //       screen.height +
+  //       ", top=0, left=0" +
+  //       ", fullscreen=yes"
+  //   );
+
+  //   let newwin = window.open(url, "windowname4", params);
+  //   if (window.focus) {
+  //     newwin.focus();
+  //   }
+  //   return false;
+  // };
+
   React.useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -24,6 +45,10 @@ function Navbar() {
       } else {
       }
     });
+    // console.log(window.location.pathname);
+    // if (window.location.pathname == "/voting") {
+    //   window.open("/voting", "fs", "fullscreen,scrollbars");
+    // }
   }, []);
 
   const provider = new GoogleAuthProvider();

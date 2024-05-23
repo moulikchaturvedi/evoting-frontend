@@ -1,1 +1,10 @@
-
+@media print {
+  html,
+  body {
+    /* Hide the whole page on printing*/
+    display: none;
+  }
+}
+html {
+  user-select: none;
+}

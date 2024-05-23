@@ -39,5 +39,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      /** TO DISABLE SCREEN CAPTURE **/
+      document.addEventListener("keydown", (e) => {
+        if (e.key) {
+          console.log(e.key);
+        }
+        if (
+          // e.key == "Save" ||
+          // (e.metaKey &&
+          //   e.shiftKey &&
+          //   (e.key == "#" || e.key == "3" || e.key == "4" || e.key == "$"))
+          e.repeat == true
+        ) {
+          e.preventDefault();
+          navigator.clipboard.writeText("");
+          alert("Screenshots disabled!");
+        }
+      });
+    </script>
   </body>
 </html>

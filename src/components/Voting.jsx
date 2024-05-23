@@ -5,6 +5,35 @@ import forge from "node-forge";
 import Candidate from "./Candidate";
 import { onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { ec as EC } from "elliptic";
+import { encrypt, decrypt } from "eciesjs";
+
+const ec = new EC("secp256k1");
+
+// Generate key pair
+const generateKeys = () => {
+  const keyPair = ec.genKeyPair();
+  console.log(keyPair.getPublic("hex"));
+  console.log(keyPair.getPrivate("hex"));
+};
+
+const ECCencrypt = (rating) => {
+  const publicKey =
+    "04f2d840337dcc22d7c4d844d8c00fb43b53656a8f5fdd189f33c23b6aadf738536fa070fd8e121812b09c998ddedcf44f2f37ee716f5e18136593dd95a212db4c";
+  const encrypted = encrypt(Buffer.from(publicKey, "hex"), Buffer.from(rating));
+  // setEncryptedData(encrypted.toString("hex"));
+  return encrypted.toString("hex");
+};
+
+// const ECCdecrypt = (rating) => {
+//   const privateKey =
+//     "62b5214f3a9ca06510713e5b8942385db59acadfa4e9769926c60011b038bc4d";
+//   const decrypted = ecies.decrypt(
+//     Buffer.from(privateKey, "hex"),
+//     Buffer.from(encryptedData, "hex")
+//   );
+//   setDecryptedData(decrypted.toString());
+// };
 
 const RSAencryption = (rating) => {
   var publicKey = forge.pki.publicKeyFromPem(
@@ -29,7 +58,7 @@ NraFT9a0hnhwVm9TcviGVXUCAwEAAQ==
       md: forge.md.sha256.create(),
     })
   );
-  console.log("enc: " + encryptedRating);
+  // console.log("enc: " + encryptedRating);
 
   //   var privateKey = forge.pki.privateKeyFromPem(`-----BEGIN RSA PRIVATE KEY-----
   // MIIJKQIBAAKCAgEAkQrSaiJyy0MsyZlTyWjQgbxvdGoCUlWjWJph/B6f91h0q9/C
@@ -147,12 +176,26 @@ function Voting() {
 
     console.log("submitted: " + JSON.stringify(rating));
 
-    const encryptedRating = RSAencryption(JSON.stringify(rating));
+    let start = Date.now();
+    console.log("startECC: " + start);
+    const encryptedRatingECC = ECCencrypt(JSON.stringify(rating));
+    // generateKeys();
+    console.log("end ercc:" + Date.now());
+    let timeTaken = Date.now() - start;
+    console.log("time taken for ECC: " + timeTaken + " milliseconds");
 
-    await updateDoc(doc(db, "Voters", localStorage.getItem("uid")), {
-      Votes: encryptedRating,
-      Voted: true,
-    });
+    start = Date.now();
+    console.log("startRSA: " + start);
+    const encryptedRatingRSA = RSAencryption(JSON.stringify(rating));
+    console.log("end rsa:" + Date.now());
+    timeTaken = Date.now() - start;
+    console.log("time taken for RSA: " + timeTaken + " milliseconds");
+
+    console.log(Date.now());
+    // await updateDoc(doc(db, "Voters", localStorage.getItem("uid")), {
+    //   Votes: encryptedRating,
+    //   Voted: true,
+    // });
   };
 
   return (

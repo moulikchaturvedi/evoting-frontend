@@ -1,0 +1,41 @@
+{
+  "short_name": "E-Voting",
+  "name": "Blockchain E-Voting System",
+  "icons": [
+    {
+      "src": "/images/icons8-react-144.png",
+      "sizes": "144x144"
+    }
+  ],
+  "id": "/",
+  "start_url": "/",
+  "background_color": "#3367D6",
+  "display-override": ["window-control-overlay", "fullscreen"],
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#000000",
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "url": "/dashboard"
+    },
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Voting",
+      "short_name": "Voting",
+      "url": "/voting"
+    },
+    {
+      "name": "Registration",
+      "short_name": "Register",
+      "url": "/register"
+    }
+  ],
+  "description": "An app for Blockchain based E-Voting System",
+  "screenshots": []
+}
